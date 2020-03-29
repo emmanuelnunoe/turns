@@ -1,6 +1,5 @@
-package imssCitados;
+
 import java.awt.*;
-import java.awt.Desktop.Action;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
