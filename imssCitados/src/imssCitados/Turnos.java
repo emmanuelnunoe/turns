@@ -28,21 +28,21 @@ public class Turnos extends JFrame implements KeyListener {
 	}
 
 	/*---------- CAMBIO DE TURNO ---------- */
-	public void siguiente ()
+	public void siguiente ( int conteo)
 	{
 		if( verificaIncremento()) {
 
-			setConteoInt(this.conteoInt++);
+			setConteoInt(conteo);
 
 		}
 
 	}
 
-	public void anterior ()
+	public void anterior (int conteo)
 	{
 		if( verificaDecremento() )
 		{
-			setConteoInt(conteoInt--);
+			setConteoInt(conteo);
 		} 
 	}
 
@@ -51,9 +51,10 @@ public class Turnos extends JFrame implements KeyListener {
 		if( getConteoInt() < 200 ) {
 			return true;
 		}
+		else {
+			return false;
+		}
 
-		return false;
-		
 	}
 
 	public boolean verificaDecremento()
@@ -61,11 +62,20 @@ public class Turnos extends JFrame implements KeyListener {
 		if( getConteoInt() > 0 ) {
 			return true;
 		}
-
-		return false;
+		else { 
+			return false;
+		}
 		
 	}
 
+	public String conteoAString () {
+		return Integer.toString(getConteoInt());
+	}
+
+	public void muestraConteo ()
+	{
+		conteoLabel.setText(conteoAString());
+	}
 
 
 	/*---------- GETTERS AND SETTERS ---------- */
@@ -105,20 +115,27 @@ public class Turnos extends JFrame implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		 int key = e.getKeyChar();
-		 
-		if(  key ==  KeyEvent.VK_BACK_SPACE){
-			anterior();
+
+		// CAMBIA AL TURNO ANTERIOR			 
+		if(  key ==  KeyEvent.VK_BACK_SPACE ) {
+
+			anterior((getConteoInt())-1);
 			System.out.println("Anterior");
+			muestraConteo();
 
 		}
-		else if( key == KeyEvent.VK_ENTER)
-		{
-			siguiente();
+		// CAMBIA AL TURNO SIGUIENTE
+		else if( key == KeyEvent.VK_ENTER) {
+
+			siguiente((getConteoInt())+1);
 			System.out.println("Siguiente");
+			muestraConteo();
+			
 		}
 		else
 		{
 			// trigger
+			// MUESTRA INFORMACIÓN O NOTICIAS
 		}
 
 	}
